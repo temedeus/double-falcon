@@ -4,11 +4,11 @@
   "private": true,
   "devDependencies": {
     "electron": "^1.4.14",
-    "react-scripts": "0.8.5"
+    "react-scripts": "3.0.1"
   },
   "dependencies": {
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
   },
   "main": "src/main.js",
   "scripts": {
@@ -17,5 +17,17 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron ."
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
