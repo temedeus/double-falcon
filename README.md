@@ -19,6 +19,8 @@ Run `yarn electron` to use actual application.
 
 Runs the electron application that points to local web server. `yarn start` must be run before this or else there is nothing to show.
 
+Depending on configuration I've run into issues with starting electron via yarn due to certain files missing. As a quick solution I advise to just run `electron .` directly in this path.
+
 ### `yarn test`
 
 Runs tests on the project.
