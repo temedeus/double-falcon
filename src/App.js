@@ -1,17 +1,36 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import FolderSelector from "./FolderSelector";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary
+  }
+}));
 
 function App() {
+  const classes = useStyles();
 
-  const remote = window.require("electron").remote
-  const mainProcess = remote.require('./main')
-  const selectDialog = mainProcess.selectDirectory
-  console.log(selectDialog)
   return (
     <div className="App">
-      <header className="App-header">
-        <button onClick={() => selectDialog()}>Select folder</button>
-      </header>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>Double Falcon</Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <FolderSelector />
+          </Paper>
+        </Grid>
+      </Grid>
     </div>
   );
 }
