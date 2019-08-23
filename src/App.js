@@ -4,6 +4,7 @@ import FolderSelector from "./FolderSelector";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import DuplicateList from "./DuplicateList";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,6 +30,9 @@ function App() {
           <Paper className={classes.paper}>
             <FolderSelector />
           </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <DuplicateList />
         </Grid>
       </Grid>
     </div>

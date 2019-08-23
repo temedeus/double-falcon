@@ -13,6 +13,7 @@ class FolderSelector extends Component {
     const remote = window.require("electron").remote;
     const mainProcess = remote.require("./main");
     const selectDialog = mainProcess.selectDirectory;
+    const instance = mainProcess.createDuplicateFinder("blaa");
     this.setState({
       selectedPath: selectDialog()
     });
