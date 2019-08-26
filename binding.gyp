@@ -6,7 +6,8 @@
         "sources": [
             "cppsrc/main.cpp",
             "cppsrc/duplicatefinder/duplicatefinderwrapper.cpp",
-            "cppsrc/duplicatefinder/duplicatefinder.cpp"
+            "cppsrc/duplicatefinder/duplicatefinder.cpp",
+            "cppsrc/duplicatefinder/sha/sha256.cpp"
         ],
         'include_dirs': [
             "<!@(node -p \"require('node-addon-api').include\")"

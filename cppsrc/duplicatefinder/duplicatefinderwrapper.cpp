@@ -38,6 +38,8 @@ Napi::Value DuplicateFinderWrapper::Scan(const Napi::CallbackInfo &info)
     Napi::Env env = info.Env();
     Napi::HandleScope scope(env);
 
-    bool num = this->duplicateFinder_->scan();
-    return Napi::Boolean::New(env, num);
+    bool success = this->duplicateFinder_->scan();
+    this->duplicateFinder_->getResults();
+
+    return Napi::Boolean::New(env, success);
 }
