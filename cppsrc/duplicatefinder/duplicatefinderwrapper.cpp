@@ -7,9 +7,7 @@ Napi::Object DuplicateFinderWrapper::Init(Napi::Env env, Napi::Object exports)
     Napi::HandleScope scope(env);
 
     Napi::Function func = DefineClass(env, "DuplicateFinderWrapper",
-                                      {
-                                          InstanceMethod("scan", &DuplicateFinderWrapper::Scan),
-                                      });
+                                      {InstanceMethod("scan", &DuplicateFinderWrapper::Scan)});
 
     constructor = Napi::Persistent(func);
     constructor.SuppressDestruct();
@@ -39,7 +37,13 @@ Napi::Value DuplicateFinderWrapper::Scan(const Napi::CallbackInfo &info)
     Napi::HandleScope scope(env);
 
     bool success = this->duplicateFinder_->scan();
-    this->duplicateFinder_->getResults();
 
-    return Napi::Boolean::New(env, success);
+    Napi::Object obj = Napi::Object::New(env);
+    std::set<std::string> duplicates = this->duplicateFinder_->getResults();
+    for (auto x : duplicates)
+    {
+        obj.Set(x, "puh");
+    }
+
+    return obj;
 }
