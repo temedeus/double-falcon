@@ -1,8 +1,7 @@
 #include "duplicatefinder.h"
 #include <iostream>
-#include <experimental/filesystem>
-
-namespace fs = std::experimental::filesystem;
+#include <filesystem>
+namespace fs = std::filesystem;
 
 DuplicateFinder::DuplicateFinder(std::string path)
 {
@@ -11,5 +10,7 @@ DuplicateFinder::DuplicateFinder(std::string path)
 
 bool DuplicateFinder::scan()
 {
+    for (auto &p : fs::recursive_directory_iterator(this->pathToScan_))
+        std::cout << p.path() << '\n';
     return false;
 }
