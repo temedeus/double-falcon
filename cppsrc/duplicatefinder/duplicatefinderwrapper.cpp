@@ -16,6 +16,9 @@ Napi::Object DuplicateFinderWrapper::Init(Napi::Env env, Napi::Object exports)
     return exports;
 }
 
+/**
+ * N-API wrapping for DuplicateFinder constructor.
+ */
 DuplicateFinderWrapper::DuplicateFinderWrapper(const Napi::CallbackInfo &info) : Napi::ObjectWrap<DuplicateFinderWrapper>(info)
 {
     Napi::Env env = info.Env();
@@ -31,6 +34,10 @@ DuplicateFinderWrapper::DuplicateFinderWrapper(const Napi::CallbackInfo &info) :
     this->duplicateFinder_ = new DuplicateFinder(value);
 }
 
+/**
+ * N-API wrapping for DuplicateFinder::scan. Also wraps results in Napi::Object that can be used
+ * JavaScript side.
+ */
 Napi::Value DuplicateFinderWrapper::Scan(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
@@ -39,10 +46,25 @@ Napi::Value DuplicateFinderWrapper::Scan(const Napi::CallbackInfo &info)
     bool success = this->duplicateFinder_->scan();
 
     Napi::Object obj = Napi::Object::New(env);
-    std::set<std::string> duplicates = this->duplicateFinder_->getResults();
-    for (auto x : duplicates)
+
+    if (success)
     {
-        obj.Set(x, "puh");
+
+        std::unordered_map<std::string, std::set<std::string>> duplicates;
+        duplicates = this->duplicateFinder_->getResults();
+
+        // Following could likely be handled more efficiently.
+        for (auto &x : duplicates)
+        {
+            Napi::Array array = Napi::Array::New(env);
+            int counter = 0;
+            for (auto &y : x.second)
+            {
+                array.Set(counter++, y);
+            }
+
+            obj.Set(x.first, array);
+        }
     }
 
     return obj;

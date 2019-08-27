@@ -1,5 +1,5 @@
 const electron = require("electron");
-const createDuplicateFinder = require("../build/Release/duplicatefinder.node");
+const duplicateFinder = require("../build/Release/duplicatefinder.node");
 
 // Module to control application life.
 const app = electron.app;
@@ -61,7 +61,9 @@ app.on("activate", function() {
 });
 
 exports.createDuplicateFinder = function(path) {
-  return new createDuplicateFinder.DuplicateFinderWrapper(path);
+  console.log("PATH", path);
+  console.log("DUPLCIATE FINDER", duplicateFinder);
+  return new duplicateFinder.DuplicateFinderWrapper(path);
 };
 
 // In this file you can include the rest of your app's specific main process

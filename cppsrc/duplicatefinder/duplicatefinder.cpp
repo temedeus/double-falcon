@@ -16,6 +16,10 @@ DuplicateFinder::DuplicateFinder(std::string path)
     this->pathToScan_ = path;
 }
 
+/**
+ * Scan path received in constructor. Returnes boolean on results.
+ * Use DuplicateFinder::getResults for actual results.
+ */
 bool DuplicateFinder::scan()
 {
     bool duplicatesFound = false;
@@ -38,13 +42,23 @@ bool DuplicateFinder::scan()
 
                 if (fileHashes.count(fileHash) == 0)
                 {
-                    fileHashes[fileHash] == p.path();
+                    fileHashes[fileHash] = p.path();
                 }
                 else
                 {
-                    duplicates.insert(p.path());
                     std::cout << "Duplicate found" << '\n';
                     duplicatesFound = true;
+                    if (duplicates.count(fileHash) == 0)
+                    {
+                        std::set<std::string> temp;
+                        temp.insert(p.path());
+                        temp.insert(fileHashes[fileHash]);
+                        duplicates[fileHash] = temp;
+                    }
+                    else
+                    {
+                        duplicates[fileHash].insert(p.path());
+                    }
                 }
             }
             else
@@ -62,7 +76,7 @@ bool DuplicateFinder::scan()
  * Provide results after DuplicateFinder::scan().
  * Otherwise empty set.
  */
-std::set<std::string> DuplicateFinder::getResults()
+std::unordered_map<std::string, std::set<std::string>> DuplicateFinder::getResults()
 {
     return duplicates;
 }

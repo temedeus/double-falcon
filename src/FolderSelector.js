@@ -5,18 +5,28 @@ import Container from "@material-ui/core/Box";
 class FolderSelector extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedPath: undefined };
+    this.state = { selectedPath: undefined, duplicateDirectories: undefined };
     this.setPathValue = this.setPathValue.bind(this);
+    this.scanFolder = this.scanFolder.bind(this);
   }
 
   setPathValue() {
     const remote = window.require("electron").remote;
     const mainProcess = remote.require("./main");
     const selectDialog = mainProcess.selectDirectory;
-    const instance = mainProcess.createDuplicateFinder("blaa");
+
     this.setState({
-      selectedPath: selectDialog()
+      selectedPath: selectDialog()[0]
     });
+  }
+
+  scanFolder() {
+    const remote = window.require("electron").remote;
+    const mainProcess = remote.require("./main");
+    const instance = mainProcess.createDuplicateFinder(this.state.selectedPath);
+
+    this.setState({ duplicateDirectories: instance.scan() });
+    console.log(this.state.duplicateDirectories);
   }
 
   render() {
@@ -34,7 +44,7 @@ class FolderSelector extends Component {
             variant="contained"
             color="primary"
             disabled={!this.state.selectedPath}
-            onClick={() => {}}
+            onClick={this.scanFolder}
           >
             Scan duplicates
           </Button>

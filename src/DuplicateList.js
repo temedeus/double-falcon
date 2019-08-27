@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MaterialTable from "material-table";
+import NestedList from "./NestedList";
 
 class DuplicateList extends Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class DuplicateList extends Component {
   }
 
   render() {
-    return <div>Blaa</div>;
+    return <NestedList />;
   }
 }
 
