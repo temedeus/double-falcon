@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Box";
+import { StateContext } from "./state";
 
 class FolderSelector extends Component {
+  static contextType = StateContext;
+
   constructor(props) {
     super(props);
-    this.state = { selectedPath: undefined, duplicateDirectories: undefined };
+    this.state = { selectedPath: undefined };
     this.setPathValue = this.setPathValue.bind(this);
     this.scanFolder = this.scanFolder.bind(this);
   }
@@ -21,12 +24,16 @@ class FolderSelector extends Component {
   }
 
   scanFolder() {
+    const [{ duplicates }, dispatch] = this.context;
     const remote = window.require("electron").remote;
     const mainProcess = remote.require("./main");
     const instance = mainProcess.createDuplicateFinder(this.state.selectedPath);
+    const results = instance.scan();
 
-    this.setState({ duplicateDirectories: instance.scan() });
-    console.log(this.state.duplicateDirectories);
+    dispatch({
+      type: "setDuplicates",
+      duplicates: results
+    });
   }
 
   render() {
