@@ -6,12 +6,16 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import { forEach } from "lodash";
+import { map } from "lodash";
 
 const useStyles = makeStyles(theme => ({
+  main: {
+    border: "solid 1px"
+  },
   nested: {
     paddingLeft: theme.spacing(4),
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
+    backgroundColor: theme.palette.background.paper
   }
 }));
 
@@ -25,7 +29,7 @@ const CollapsableListItem = props => {
   };
 
   const listItems = duplicates => {
-    return forEach(duplicates, duplicateItemPath => {
+    return map(duplicates, duplicateItemPath => {
       return (
         <ListItem button className={classes.nested}>
           <ListItemText primary={duplicateItemPath} />
@@ -35,10 +39,10 @@ const CollapsableListItem = props => {
   };
 
   const items = listItems(duplicates);
-
+  console.log("baaitems", items);
   return (
     <div>
-      <ListItem button onClick={handleClick}>
+      <ListItem className={classes.main} button onClick={handleClick}>
         <ListItemText primary={title} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>

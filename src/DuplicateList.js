@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ListSubheader from "@material-ui/core/ListSubheader";
@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     maxWidth: 650,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.default
   }
 }));
 
@@ -23,9 +23,8 @@ const createItems = duplicates => {
 
 const DuplicateList = () => {
   const classes = useStyles();
-  const [{ duplicates }, dispatch] = useStateValue();
+  const [{ duplicates }] = useStateValue();
   const items = createItems(duplicates);
-  console.log("items", items);
   return (
     <List
       component="nav"
