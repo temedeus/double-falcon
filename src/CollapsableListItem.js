@@ -6,25 +6,35 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import { forEach } from "lodash";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  },
   nested: {
-    paddingLeft: theme.spacing(4)
+    paddingLeft: theme.spacing(4),
+    textOverflow: "ellipsis"
   }
 }));
 
-const CollapsableListItem = (title, firstPath, secondPath) => {
+const CollapsableListItem = props => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const { title, duplicates } = props;
+  const [open, setOpen] = React.useState(false);
 
-  handleClick = () => {
+  const handleClick = () => {
     setOpen(!open);
   };
+
+  const listItems = duplicates => {
+    return forEach(duplicates, duplicateItemPath => {
+      return (
+        <ListItem button className={classes.nested}>
+          <ListItemText primary={duplicateItemPath} />
+        </ListItem>
+      );
+    });
+  };
+
+  const items = listItems(duplicates);
 
   return (
     <div>
@@ -34,12 +44,7 @@ const CollapsableListItem = (title, firstPath, secondPath) => {
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemText primary={firstPath} />
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemText primary={secondPath} />
-          </ListItem>
+          {items}
         </List>
       </Collapse>
     </div>

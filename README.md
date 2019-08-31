@@ -1,6 +1,6 @@
 ## Double Falcon
 
-Double Falcon makes it possible for user to scan local directories for duplicate files. Double Falcon generates hashes based on content to detect identical files.
+Double Falcon makes it possible for user to scan local directories for duplicate files. Double Falcon generates hashes based on content to detect identical files. Front-end is react with hooks + context to manage with state. Back-end is written in C++ that needs to be compiled to a native node module for each platform.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

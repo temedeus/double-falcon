@@ -20,13 +20,14 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
   const classes = useStyles();
-  const initialState = { blaa: "blaa" };
+  const initialState = {};
   const reducer = (state, action) => {
     console.log("action", action);
     switch (action.type) {
       case "setDuplicates":
         return {
-          ...action.duplicates
+          ...state,
+          duplicates: { ...action.duplicates }
         };
 
       default:
