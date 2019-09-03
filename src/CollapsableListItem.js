@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -7,20 +7,10 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { map } from "lodash";
-
-const useStyles = makeStyles(theme => ({
-  main: {
-    border: "solid 1px"
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-    textOverflow: "ellipsis",
-    backgroundColor: theme.palette.background.paper
-  }
-}));
+import { makeCollapsibleListItemStyles } from "./styles/styles";
 
 const CollapsableListItem = props => {
-  const classes = useStyles();
+  const classes = makeCollapsibleListItemStyles();
   const { title, duplicates } = props;
   const [open, setOpen] = React.useState(false);
 

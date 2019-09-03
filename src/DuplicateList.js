@@ -1,19 +1,10 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import { useStateValue } from "./state";
 import _ from "lodash";
 import CollapsableListItem from "./CollapsableListItem";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    maxWidth: 650,
-    backgroundColor: theme.palette.background.default
-  }
-}));
+import { makeDuplicateListStyles } from "./styles/styles";
 
 const createItems = duplicates => {
   return _.map(duplicates, (value, key) => {
@@ -22,7 +13,7 @@ const createItems = duplicates => {
 };
 
 const DuplicateList = () => {
-  const classes = useStyles();
+  const classes = makeDuplicateListStyles();
   const [{ duplicates }] = useStateValue();
   const items = createItems(duplicates);
   return (
