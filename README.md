@@ -1,6 +1,6 @@
 ## Double Falcon
 
-Double Falcon makes it possible for user to scan local directories for duplicate files. Double Falcon generates hashes based on content to detect identical files. Front-end is React with hooks + context to manage with state. Back-end is written in C++ that needs to be compiled to a native node module for each platform.
+Double Falcon is a desktop application that scans local directories for duplicate files. Double Falcon generates hashes based on content to detect identical files. Front-end is React with hooks + context to manage state. Front-end is wrapped as an Electron application. Back-end is written in C++ that needs to be compiled to a native node module for each platform.
 
 All React components are written as functional components.
 
@@ -21,7 +21,7 @@ Run `npm run electron` to use actual application.
 
 ### `npm run electron`
 
-Runs the electron application that points to local web server. `yarn start` must be run before this or else there is nothing to show.
+Runs the electron application that points to local web server. `npm start` must be run before this or else there is nothing to show.
 
 Depending on configuration I've run into issues with starting electron via yarn due to certain files missing. As a quick solution I advise to just run `electron .` directly in this path.
 
