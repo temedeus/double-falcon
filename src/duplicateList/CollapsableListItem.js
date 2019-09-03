@@ -7,7 +7,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { map } from "lodash";
-import { makeCollapsibleListItemStyles } from "./styles/styles";
+import { makeCollapsibleListItemStyles } from "../styles/styles";
 
 const CollapsableListItem = props => {
   const classes = makeCollapsibleListItemStyles();

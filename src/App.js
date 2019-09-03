@@ -3,7 +3,7 @@ import "./App.css";
 import FolderSelector from "./FolderSelector";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import DuplicateList from "./DuplicateList";
+import DuplicateList from "./duplicateList/DuplicateList";
 import { StateProvider } from "./state";
 import { makeAppStyles } from "./styles/styles";
 import { duplicateReducer } from "./reducers/duplicateReducer";

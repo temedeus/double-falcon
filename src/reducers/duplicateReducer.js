@@ -1,6 +1,7 @@
+import { Actions } from "../actions/actions";
 export const duplicateReducer = (state, action) => {
   switch (action.type) {
-    case "setDuplicates":
+    case Actions.ADD_DUPLICATES:
       return {
         ...state,
         duplicates: { ...action.duplicates }

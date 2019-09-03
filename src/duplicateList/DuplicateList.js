@@ -1,10 +1,10 @@
 import React from "react";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
-import { useStateValue } from "./state";
+import { useStateValue } from "../state";
 import _ from "lodash";
 import CollapsableListItem from "./CollapsableListItem";
-import { makeDuplicateListStyles } from "./styles/styles";
+import { makeDuplicateListStyles } from "../styles/styles";
 
 const createItems = duplicates => {
   return _.map(duplicates, (value, key) => {
