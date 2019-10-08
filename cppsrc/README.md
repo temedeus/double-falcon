@@ -11,3 +11,7 @@ Ideally this should be separate npm repository, but for this project purposes it
 Requirements
 
 - Make sure to compile using gcc 8.0
+
+## sha256 implementation
+
+Utilizing implementation by Olivier Gay: [http://www.ouah.org/ogay/sha2/](http://www.ouah.org/ogay/sha2/)
