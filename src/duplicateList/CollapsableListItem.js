@@ -29,7 +29,6 @@ const CollapsableListItem = props => {
   };
 
   const items = listItems(duplicates);
-  console.log("baaitems", items);
   return (
     <div>
       <ListItem className={classes.main} button onClick={handleClick}>

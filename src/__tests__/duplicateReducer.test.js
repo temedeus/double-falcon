@@ -1,4 +1,4 @@
-import { duplicateReducer } from "./duplicateReducer";
+import { duplicateReducer } from "../reducers/duplicateReducer";
 import { Actions } from "../actions/actions";
 
 it("saves duplicates in the state using correct action", () => {
