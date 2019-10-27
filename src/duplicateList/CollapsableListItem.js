@@ -21,7 +21,7 @@ const CollapsableListItem = props => {
   const listItems = duplicates => {
     return map(duplicates, duplicateItemPath => {
       return (
-        <ListItem button className={classes.nested}>
+        <ListItem key={duplicateItemPath} button className={classes.nested}>
           <ListItemText primary={duplicateItemPath} />
         </ListItem>
       );
@@ -35,7 +35,7 @@ const CollapsableListItem = props => {
         <ListItemText primary={title} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse key={title} in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {items}
         </List>
