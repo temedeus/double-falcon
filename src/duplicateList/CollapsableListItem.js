@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useStateValue } from "../state";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -8,27 +8,45 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { map } from "lodash";
 import { makeCollapsibleListItemStyles } from "../styles/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import IconButton from "@material-ui/core/IconButton";
+import { deleteDuplicate } from "../actions/actions";
 
 const CollapsableListItem = props => {
   const classes = makeCollapsibleListItemStyles();
-  const { title, duplicates } = props;
+  const { title, duplicateItemPaths } = props;
   const [open, setOpen] = React.useState(false);
+  const [{ duplicates }, dispatch] = useStateValue();
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  const listItems = duplicates => {
+  const deleteAction = (title, duplicateItemPath) => {
+    deleteDuplicate(title, duplicateItemPath).then(action => dispatch(action));
+  };
+
+  const listItems = (title, duplicates) => {
     return map(duplicates, duplicateItemPath => {
       return (
         <ListItem key={duplicateItemPath} button className={classes.nested}>
           <ListItemText primary={duplicateItemPath} />
+          <ListItemSecondaryAction>
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={() => deleteAction(title, duplicateItemPath)}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
         </ListItem>
       );
     });
   };
 
-  const items = listItems(duplicates);
+  const items = listItems(title, duplicateItemPaths);
   return (
     <div>
       <ListItem className={classes.main} button onClick={handleClick}>

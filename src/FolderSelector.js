@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Box";
 import { useStateValue } from "./state";
-import { Actions } from "./actions/actions";
+import { ActionTypes } from "./actions/actiontypes";
 
 const FolderSelector = () => {
   const [{ duplicates }, dispatch] = useStateValue();
@@ -23,7 +23,7 @@ const FolderSelector = () => {
     const results = instance.scan();
 
     dispatch({
-      type: Actions.ADD_DUPLICATES,
+      type: ActionTypes.ADD_DUPLICATES,
       duplicates: results
     });
   };

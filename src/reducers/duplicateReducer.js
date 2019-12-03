@@ -1,4 +1,4 @@
-import { Actions } from "../actions/actions";
+import { ActionTypes } from "../actions/actiontypes";
 /**
  * 
  * Returned duplicates use followuing format (object with arrays of duplicate paths, hash as key):
@@ -13,7 +13,21 @@ import { Actions } from "../actions/actions";
  */
 export const duplicateReducer = (state, action) => {
   switch (action.type) {
-    case Actions.ADD_DUPLICATES:
+    case ActionTypes.DELETE_DUPLICATE:
+      const key = action.key;
+      const toBeCleaned = state.duplicates[key];
+
+      const newItem = toBeCleaned.filter(
+        element => element !== action.pathToDelete
+      );
+
+      const duplicates = { ...state.duplicates, [key]: newItem };
+
+      return {
+        ...state,
+        duplicates
+      };
+    case ActionTypes.ADD_DUPLICATES:
       return {
         ...state,
         duplicates: { ...action.duplicates }

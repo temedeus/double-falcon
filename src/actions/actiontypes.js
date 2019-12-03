@@ -1,0 +1,4 @@
+export const ActionTypes = {
+  ADD_DUPLICATES: "ADD_DUPLICATES",
+  DELETE_DUPLICATE: "DELETE_DUPLICATE"
+};

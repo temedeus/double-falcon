@@ -8,7 +8,9 @@ import { makeDuplicateListStyles } from "../styles/styles";
 
 const createItems = duplicates => {
   return _.map(duplicates, (value, key) => {
-    return <CollapsableListItem key={key} title={key} duplicates={value} />;
+    return (
+      <CollapsableListItem key={key} title={key} duplicateItemPaths={value} />
+    );
   });
 };
 

@@ -10,5 +10,7 @@ public:
 private:
     static Napi::FunctionReference constructor;
     Napi::Value Scan(const Napi::CallbackInfo &info);
+    void Clear(const Napi::CallbackInfo &info);
+    Napi::Value DeleteFile(const Napi::CallbackInfo &info);
     DuplicateFinder *duplicateFinder_;
 };

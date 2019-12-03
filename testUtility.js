@@ -16,5 +16,5 @@ const newFromExisting = new createDuplicateFinder.DuplicateFinderWrapper(
 
 console.log("Testing class initial value for derived instance");
 console.log(newFromExisting.scan());
-
+newFromExisting.clear();
 module.exports = createDuplicateFinder;

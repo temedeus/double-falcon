@@ -88,3 +88,24 @@ void DuplicateFinder::clear()
 {
     fileHashes.clear();
 }
+
+bool DuplicateFinder::deleteFile(std::string file)
+{
+
+    if (!std::filesystem::exists(file) || !std::filesystem::is_regular_file(file))
+    {
+        perror("File could not be deleted");
+        return false;
+    }
+
+    if (remove(file.c_str()) != 0)
+    {
+        perror("File could not be deleted");
+        return false;
+    }
+    else
+    {
+        puts("File successfully deleted");
+        return true;
+    }
+}

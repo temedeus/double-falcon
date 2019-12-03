@@ -7,9 +7,14 @@ Napi::Object DuplicateFinderWrapper::Init(Napi::Env env, Napi::Object exports)
     Napi::HandleScope scope(env);
 
     Napi::Function func = DefineClass(env, "DuplicateFinderWrapper",
-                                      {InstanceMethod("scan", &DuplicateFinderWrapper::Scan)});
+                                      {
+                                          InstanceMethod("scan", &DuplicateFinderWrapper::Scan),
+                                          InstanceMethod("deleteFile", &DuplicateFinderWrapper::DeleteFile),
+                                          InstanceMethod("clear", &DuplicateFinderWrapper::Clear),
+                                      });
 
     constructor = Napi::Persistent(func);
+
     constructor.SuppressDestruct();
 
     exports.Set("DuplicateFinderWrapper", func);
@@ -27,7 +32,7 @@ DuplicateFinderWrapper::DuplicateFinderWrapper(const Napi::CallbackInfo &info) :
     int length = info.Length();
     if (length != 1)
     {
-        Napi::TypeError::New(env, "Number expected").ThrowAsJavaScriptException();
+        Napi::TypeError::New(env, "Path string expected").ThrowAsJavaScriptException();
     }
 
     Napi::String value = info[0].As<Napi::String>();
@@ -68,4 +73,34 @@ Napi::Value DuplicateFinderWrapper::Scan(const Napi::CallbackInfo &info)
     }
 
     return obj;
+}
+
+/**
+ * N-API wrapping for DuplicateFinder::clear.
+ */
+void DuplicateFinderWrapper::Clear(const Napi::CallbackInfo &info)
+{
+    Napi::Env env = info.Env();
+    Napi::HandleScope scope(env);
+
+    this->duplicateFinder_->clear();
+}
+
+/**
+ * N-API wrapping for DuplicateFinder::deleteFile.
+ */
+Napi::Value DuplicateFinderWrapper::DeleteFile(const Napi::CallbackInfo &info)
+{
+    Napi::Env env = info.Env();
+    Napi::HandleScope scope(env);
+
+    int length = info.Length();
+    if (length != 1)
+    {
+        Napi::TypeError::New(env, "Path string expected").ThrowAsJavaScriptException();
+    }
+
+    Napi::String value = info[0].As<Napi::String>();
+
+    return Napi::Boolean::New(env, this->duplicateFinder_->deleteFile(value));
 }

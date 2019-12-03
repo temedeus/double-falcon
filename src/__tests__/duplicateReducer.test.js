@@ -1,5 +1,5 @@
 import { duplicateReducer } from "../reducers/duplicateReducer";
-import { Actions } from "../actions/actions";
+import { Actions } from "../actions/actiontypes";
 
 it("saves duplicates in the state using correct action", () => {
   const state = {};

@@ -8,6 +8,7 @@ public:
     DuplicateFinder(std::string path);
     bool scan();
     void clear();
+    bool deleteFile(std::string file);
     std::unordered_map<std::string, std::set<std::string>> getResults();
 
 private:
