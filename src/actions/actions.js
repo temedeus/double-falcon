@@ -1,11 +1,31 @@
 import { ActionTypes } from "./actiontypes";
+import { getActiveInstance } from "../utils/nativeUtil";
 
+/**
+ * Delete duplicate file from both the file system and state.
+ *
+ * @param {*} key
+ * @param {*} pathToDelete
+ */
 export const deleteDuplicate = async (key, pathToDelete) => {
-  // await newFromExisting.deleteFile("/home/temedeus/fi/");
+  if (getActiveInstance() !== undefined) {
+    await getActiveInstance().deleteFile(pathToDelete);
 
+    return {
+      type: ActionTypes.DELETE_DUPLICATE,
+      key,
+      pathToDelete
+    };
+  }
+};
+
+/**
+ * Add received duplicates into state.
+ * @param {*} results
+ */
+export const addDuplicates = results => {
   return {
-    type: ActionTypes.DELETE_DUPLICATE,
-    key,
-    pathToDelete
+    type: ActionTypes.ADD_DUPLICATES,
+    duplicates: results
   };
 };

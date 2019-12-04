@@ -8,10 +8,9 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { map } from "lodash";
 import { makeCollapsibleListItemStyles } from "../styles/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import IconButton from "@material-ui/core/IconButton";
 import { deleteDuplicate } from "../actions/actions";
+import DeleteConfirmationDialog from "./DeleteConfirmationDialog";
 
 const CollapsableListItem = props => {
   const classes = makeCollapsibleListItemStyles();
@@ -24,7 +23,11 @@ const CollapsableListItem = props => {
   };
 
   const deleteAction = (title, duplicateItemPath) => {
-    deleteDuplicate(title, duplicateItemPath).then(action => dispatch(action));
+    return () => {
+      deleteDuplicate(title, duplicateItemPath).then(action =>
+        dispatch(action)
+      );
+    };
   };
 
   const listItems = (title, duplicates) => {
@@ -33,13 +36,10 @@ const CollapsableListItem = props => {
         <ListItem key={duplicateItemPath} button className={classes.nested}>
           <ListItemText primary={duplicateItemPath} />
           <ListItemSecondaryAction>
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => deleteAction(title, duplicateItemPath)}
-            >
-              <DeleteIcon />
-            </IconButton>
+            <DeleteConfirmationDialog
+              deletePath={duplicateItemPath}
+              deleteAction={deleteAction(title, duplicateItemPath)}
+            />
           </ListItemSecondaryAction>
         </ListItem>
       );

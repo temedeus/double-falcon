@@ -15,13 +15,18 @@ export const duplicateReducer = (state, action) => {
   switch (action.type) {
     case ActionTypes.DELETE_DUPLICATE:
       const key = action.key;
-      const toBeCleaned = state.duplicates[key];
+      const oldDuplicates = state.duplicates;
 
-      const newItem = toBeCleaned.filter(
-        element => element !== action.pathToDelete
-      );
+      const duplicates = Object.keys(oldDuplicates).reduce((acc, key) => {
+        const cleanedPaths = oldDuplicates[key].filter(
+          element => element !== action.pathToDelete
+        );
+        if (cleanedPaths.length > 1) {
+          acc[key] = cleanedPaths;
+        }
 
-      const duplicates = { ...state.duplicates, [key]: newItem };
+        return acc;
+      }, {});
 
       return {
         ...state,

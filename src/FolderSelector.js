@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Box";
 import { useStateValue } from "./state";
-import { ActionTypes } from "./actions/actiontypes";
+import { createDuplicateFinderInstance } from "./utils/nativeUtil";
+import { addDuplicates } from "./actions/actions";
 
 const FolderSelector = () => {
   const [{ duplicates }, dispatch] = useStateValue();
@@ -17,15 +18,10 @@ const FolderSelector = () => {
   };
 
   const scanFolder = () => {
-    const remote = window.require("electron").remote;
-    const mainProcess = remote.require("./main");
-    const instance = mainProcess.createDuplicateFinder(selectedPath);
+    const instance = createDuplicateFinderInstance(selectedPath);
     const results = instance.scan();
 
-    dispatch({
-      type: ActionTypes.ADD_DUPLICATES,
-      duplicates: results
-    });
+    dispatch(addDuplicates(results));
   };
 
   return (
