@@ -17,10 +17,12 @@ it("properly prints out duplicates", () => {
   const duplicates = ["/path/file1", "/path/file2", "/path/file3"];
 
   const wrapper = shallow(
-    <CollapsableListItem title="Title" duplicates={duplicates} />
+    <CollapsableListItem title="Title" duplicateItemPaths={duplicates} />
   );
 
   duplicates.forEach(duplicate => {
     expect(wrapper.exists({ primary: duplicate })).toBe(true);
   });
+
+  expect(wrapper.find("ExpandMoreIcon").exists());
 });

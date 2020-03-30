@@ -5,19 +5,35 @@ import { useStateValue } from "../state";
 import _ from "lodash";
 import CollapsableListItem from "./CollapsableListItem";
 import { makeDuplicateListStyles } from "../styles/styles";
+import { deleteDuplicate } from "../actions/actions";
 
-const createItems = duplicates => {
+const createItems = (duplicates, deleteAction) => {
   return _.map(duplicates, (value, key) => {
     return (
-      <CollapsableListItem key={key} title={key} duplicateItemPaths={value} />
+      <CollapsableListItem
+        key={key}
+        title={key}
+        duplicateItemPaths={value}
+        deleteAction={() => deleteAction(key, value)}
+      />
     );
   });
 };
 
 const DuplicateList = () => {
   const classes = makeDuplicateListStyles();
-  const [{ duplicates }] = useStateValue();
-  const items = createItems(duplicates);
+  const [{ duplicates }, dispatch] = useStateValue();
+
+  const deleteAction = (title, duplicateItemPath) => {
+    return () => {
+      deleteDuplicate(title, duplicateItemPath).then(action =>
+        dispatch(action)
+      );
+    };
+  };
+
+  const items = createItems(duplicates, deleteAction);
+
   return (
     <List
       component="nav"

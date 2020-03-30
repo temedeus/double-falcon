@@ -1,10 +1,10 @@
 import { duplicateReducer } from "../reducers/duplicateReducer";
-import { Actions } from "../actions/actiontypes";
+import { ActionTypes } from "../actions/actiontypes";
 
 it("saves duplicates in the state using correct action", () => {
   const state = {};
   const action = {
-    type: Actions.ADD_DUPLICATES,
+    type: ActionTypes.ADD_DUPLICATES,
     duplicates: ["duplicate1", "duplicate2"]
   };
 
@@ -15,7 +15,7 @@ it("saves duplicates in the state using correct action", () => {
 it("empties duplicates when no values given", () => {
   const state = {};
   const action = {
-    type: Actions.ADD_DUPLICATES,
+    type: ActionTypes.ADD_DUPLICATES,
     duplicates: []
   };
 

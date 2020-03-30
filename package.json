@@ -7,7 +7,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "node-gyp": "^3.7.0",
-    "react-scripts": "3.0.1"
+    "react-scripts": "^3.4.1"
   },
   "dependencies": {
     "@material-ui/core": "^4.3.0",

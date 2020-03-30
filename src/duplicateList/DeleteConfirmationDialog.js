@@ -17,7 +17,6 @@ const DeleteConfirmationDialog = props => {
   const { deleteAction, deletePath } = props;
 
   const handleClickOpen = () => {
-    console.log("opening dialog");
     setOpen(true);
   };
 
