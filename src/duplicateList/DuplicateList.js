@@ -26,7 +26,7 @@ const DuplicateList = () => {
 
   const deleteAction = (title, duplicateItemPath) => {
     return () => {
-      deleteDuplicate(title, duplicateItemPath).then(action =>
+      deleteDuplicate(title, duplicateItemPath).then((action) =>
         dispatch(action)
       );
     };
