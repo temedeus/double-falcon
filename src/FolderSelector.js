@@ -9,12 +9,19 @@ const FolderSelector = () => {
   const [{ duplicates }, dispatch] = useStateValue();
   const [selectedPath, setSelectedPath] = useState(undefined);
 
-  const setPathValue = () => {
+  const setPathValue = async () => {
     const remote = window.require("electron").remote;
     const mainProcess = remote.require("./main");
     const selectDialog = mainProcess.selectDirectory;
-
-    setSelectedPath(selectDialog()[0]);
+    selectDialog()
+      .then((result) => {
+        const pathFromDialog = result.filePaths[0];
+        console.debug("Path: ", pathFromDialog);
+        setSelectedPath(pathFromDialog);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const scanFolder = () => {
