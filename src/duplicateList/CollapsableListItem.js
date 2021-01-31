@@ -10,7 +10,7 @@ import { makeCollapsibleListItemStyles } from "../styles/styles";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import DeleteConfirmationDialog from "./DeleteConfirmationDialog";
 
-const CollapsableListItem = props => {
+const CollapsableListItem = (props) => {
   const classes = makeCollapsibleListItemStyles();
   const { title, duplicateItemPaths, deleteAction } = props;
   const [open, setOpen] = React.useState(false);
@@ -19,15 +19,19 @@ const CollapsableListItem = props => {
     setOpen(!open);
   };
 
-  const listItems = duplicates => {
-    return map(duplicates, duplicateItemPath => {
+  const listItems = (duplicates) => {
+    return map(duplicates, (duplicateItemPath) => {
       return (
         <ListItem key={duplicateItemPath} button className={classes.nested}>
           <ListItemText primary={duplicateItemPath} />
           <ListItemSecondaryAction>
             <DeleteConfirmationDialog
               deletePath={duplicateItemPath}
-              deleteAction={deleteAction}
+              deleteAction={() => {
+                console.log("blaa", deleteAction);
+
+                deleteAction(title, duplicateItemPath);
+              }}
             />
           </ListItemSecondaryAction>
         </ListItem>

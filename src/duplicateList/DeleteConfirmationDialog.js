@@ -10,7 +10,7 @@ import { useTheme } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 
-const DeleteConfirmationDialog = props => {
+const DeleteConfirmationDialog = (props) => {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -21,7 +21,7 @@ const DeleteConfirmationDialog = props => {
   };
 
   const handleConfirmDelete = () => {
-    props.deleteAction();
+    deleteAction();
     setOpen(false);
   };
 

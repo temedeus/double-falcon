@@ -14,7 +14,7 @@ const createItems = (duplicates, deleteAction) => {
         key={key}
         title={key}
         duplicateItemPaths={value}
-        deleteAction={() => deleteAction(key, value)}
+        deleteAction={(title, path) => deleteAction(title, path)}
       />
     );
   });
@@ -25,11 +25,9 @@ const DuplicateList = () => {
   const [{ duplicates }, dispatch] = useStateValue();
 
   const deleteAction = (title, duplicateItemPath) => {
-    return () => {
-      deleteDuplicate(title, duplicateItemPath).then((action) =>
-        dispatch(action)
-      );
-    };
+    deleteDuplicate(title, duplicateItemPath).then((action) =>
+      dispatch(action)
+    );
   };
 
   const items = createItems(duplicates, deleteAction);

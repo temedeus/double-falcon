@@ -5,14 +5,16 @@ import { duplicateReducer } from "../reducers/duplicateReducer";
 import { mount, shallow } from "enzyme";
 import { StateProvider } from "../state";
 
-it("mounts and unmounts without crashing", () => {
-  const initialState = {};
+describe("<DuplicateList />", () => {
+  it("mounts and unmounts without crashing", () => {
+    const initialState = {};
 
-  const wrapper = shallow(
-    <StateProvider initialState={initialState} reducer={null}>
-      <DuplicateList />
-    </StateProvider>
-  );
-  expect(wrapper.exists(DuplicateList)).toBe(true);
-  wrapper.unmount();
+    const wrapper = shallow(
+      <StateProvider initialState={initialState} reducer={null}>
+        <DuplicateList />
+      </StateProvider>
+    );
+    expect(wrapper.exists(DuplicateList)).toBe(true);
+    wrapper.unmount();
+  });
 });
