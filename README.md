@@ -12,23 +12,6 @@ Recommended build tool is npm since yarn appeared to have issues with node-gyp t
 
 In the project directory, you can run:
 
-### `npm start`
-
-Runs the app in development mode using hot reload.<br>
-For development purposes [http://localhost:3000](http://localhost:3000) is served through web server. In deployed application static files are used instead.
-
-Run `npm run electron` to use actual application.
-
-### `npm run electron`
-
-Runs the electron application that points to local web server. `npm start` must be run before this or else there is nothing to show.
-
-Depending on configuration I've run into issues with starting electron via yarn due to certain files missing. As a quick solution I advise to just run `electron .` directly in this path.
-
-### `npm run test`
-
-Runs tests on the project.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
@@ -48,3 +31,26 @@ Build native module only.
 Requires
 
 - gcc 8.0
+
+### `npm start`
+
+Runs the app in development mode using hot reload.<br>
+For development purposes [http://localhost:3000](http://localhost:3000) is served through web server. In deployed application static files are used instead.
+
+Run `npm run electron` to use actual application.
+
+### `npm run electron`
+
+Runs the electron application that points to local web server. `npm start` must be run before this or else there is nothing to show.
+
+Depending on configuration I've run into issues with starting electron via yarn due to certain files missing. As a quick solution I advise to just run `electron .` directly in this path.
+
+### `npm run test`
+
+Runs tests on the project.
+
+### Testing duplicatefinder local backend
+
+Test utility for duplicatefinder "backend" requires only one parameter: path to scan.
+
+- node testUtility.js /path/to/scan/dir/
