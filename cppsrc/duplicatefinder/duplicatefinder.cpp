@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <fstream>
 #include "sha/sha256.h"
+#include <sstream>
 
 namespace fs = std::filesystem;
 
@@ -17,7 +18,7 @@ DuplicateFinder::DuplicateFinder(std::string path)
 }
 
 /**
- * Scan path received in constructor. Returnes boolean on results.
+ * Scan path received in constructor. Returns boolean on results.
  * Use DuplicateFinder::getResults for actual results.
  */
 bool DuplicateFinder::scan()

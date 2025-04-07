@@ -1,59 +1,48 @@
-import React from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import { map } from "lodash";
-import { makeCollapsibleListItemStyles } from "../styles/styles";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import React, { useState } from "react";
+import {
+    List,
+    ListItem,
+    ListItemText,
+    Collapse,
+    ListItemSecondaryAction,
+    IconButton,
+} from "@mui/material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import DeleteConfirmationDialog from "./DeleteConfirmationDialog";
 
-const CollapsableListItem = (props) => {
-  const classes = makeCollapsibleListItemStyles();
-  const { title, duplicateItemPaths, deleteAction } = props;
-  const [open, setOpen] = React.useState(false);
+const CollapsableListItem = ({ title, duplicateItemPaths, deleteAction }) => {
+    const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+    const handleClick = () => setOpen((prev) => !prev);
 
-  const listItems = (duplicates) => {
-    return map(duplicates, (duplicateItemPath) => {
-      return (
-        <ListItem key={duplicateItemPath} button className={classes.nested}>
-          <ListItemText primary={duplicateItemPath} />
-          <ListItemSecondaryAction>
-            <DeleteConfirmationDialog
-              deletePath={duplicateItemPath}
-              deleteAction={() => {
-                console.log("blaa", deleteAction);
+    return (
+        <>
+            <ListItem button onClick={handleClick} sx={{ bgcolor: "#f0f0f0" }}>
+                <ListItemText primary={title} />
+                {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
 
-                deleteAction(title, duplicateItemPath);
-              }}
-            />
-          </ListItemSecondaryAction>
-        </ListItem>
-      );
-    });
-  };
-
-  const items = listItems(duplicateItemPaths);
-
-  return (
-    <div>
-      <ListItem className={classes.main} button onClick={handleClick}>
-        <ListItemText primary={title} />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse key={title} in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {items}
-        </List>
-      </Collapse>
-    </div>
-  );
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    {duplicateItemPaths.map((path) => (
+                        <ListItem
+                            key={path}
+                            button
+                            sx={{ pl: 4, borderBottom: "1px solid #eee" }}
+                        >
+                            <ListItemText primary={path} />
+                            <ListItemSecondaryAction>
+                                <DeleteConfirmationDialog
+                                    deletePath={path}
+                                    deleteAction={() => deleteAction(title, path)}
+                                />
+                            </ListItemSecondaryAction>
+                        </ListItem>
+                    ))}
+                </List>
+            </Collapse>
+        </>
+    );
 };
 
 export default CollapsableListItem;

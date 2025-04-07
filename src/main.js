@@ -1,5 +1,6 @@
 const electron = require("electron");
 const duplicateFinder = require("../build/Release/duplicatefinder.node");
+const { ipcMain, dialog } = require("electron");
 
 // Module to control application life.
 const app = electron.app;
@@ -19,7 +20,10 @@ function createWindow() {
     width: 860,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
+      preload: path.join(__dirname, "preload.js"),
+      contextIsolation: true,
+      enableRemoteModule: false,
+      nodeIntegration: false, // disable for security
     },
   });
 
@@ -67,8 +71,9 @@ exports.createDuplicateFinder = function (path) {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-exports.selectDirectory = function () {
-  return electron.dialog.showOpenDialog(mainWindow, {
+ipcMain.handle("dialog:selectDirectory", async () => {
+  const result = await dialog.showOpenDialog(mainWindow, {
     properties: ["openDirectory"],
   });
-};
+  return result;
+});
