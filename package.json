@@ -17,15 +17,15 @@
     "@mui/icons-material": "^5.15.0",
     "lodash": "^4.17.21",
     "material-react-table": "^1.14.0",
-    "nan": "^2.18.0",
+    "nan": "^2.22.2",
     "node-addon-api": "^7.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "electron": "^29.0.0",
-    "node-gyp": "^9.4.0",
-    "react-scripts": "latest",
+    "node-gyp": "^11.2.0",
+    "react-scripts": "5.0.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/jest-dom": "^6.6.3"
   },
