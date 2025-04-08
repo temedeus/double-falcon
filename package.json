@@ -15,7 +15,6 @@
   "dependencies": {
     "@mui/material": "^5.15.0",
     "@mui/icons-material": "^5.15.0",
-    "file-system": "^2.2.2",
     "lodash": "^4.17.21",
     "material-react-table": "^1.14.0",
     "nan": "^2.18.0",
