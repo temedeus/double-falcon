@@ -31,6 +31,7 @@ const CollapsableListItem = ({ title, duplicateItemPaths, deleteAction }) => {
                             sx={{ pl: 4, borderBottom: "1px solid #eee" }}
                         >
                             <ListItemText primary={path} />
+
                             <ListItemSecondaryAction>
                                 <DeleteConfirmationDialog
                                     deletePath={path}

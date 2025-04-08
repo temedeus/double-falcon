@@ -2,32 +2,42 @@
   "name": "double-falcon",
   "version": "0.5.0",
   "private": true,
-  "main": "src/main.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && node-gyp rebuild",
+    "dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron electron/main.js\"",
+    "build": "vite build && node-gyp rebuild",
     "build-native": "node-gyp rebuild",
     "clean": "node-gyp clean",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "test": "vitest",
     "electron": "./node_modules/.bin/electron ."
   },
   "dependencies": {
-    "@mui/material": "^5.15.0",
+    "@eslint/js": "^9.21.0",
     "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
     "lodash": "^4.17.21",
     "material-react-table": "^1.14.0",
     "nan": "^2.22.2",
     "node-addon-api": "^7.0.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "vite": "^6.2.0"
   },
   "devDependencies": {
-    "electron": "^29.0.0",
-    "node-gyp": "^11.2.0",
-    "react-scripts": "5.0.1",
+    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
-    "@testing-library/jest-dom": "^6.6.3"
+    "concurrently": "^9.1.2",
+    "electron": "^29.0.0",
+    "jsdom": "^26.0.0",
+    "node-gyp": "^11.2.0",
+    "vitest": "^3.1.1",
+    "wait-on": "^8.0.3"
   },
   "browserslist": {
     "production": [
